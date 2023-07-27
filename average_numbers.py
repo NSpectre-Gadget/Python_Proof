@@ -1,20 +1,21 @@
-x = input("Enter a number: ")
-x = x.split()
-print(x)
+n = int(input("Enter no. of variables to average: ").strip())
+num = []
 
-numbers = []
-sum_num = sum(numbers)
-len_num = len(numbers)
+for i in range(n):
+    y = int(input("Number: "))
+    num.append(y)
+print(num)
 
-for x in numbers:
-    numbers.append(x)
-print(numbers)
+sum_num = sum(num)
+len_num = len(num)
+
+print(sum_num)
+print(len_num)
 
 
-def average():
-    # x = input("Enter several numbers separated by a comma to be averaged: ")
+def average_num():
     average = sum_num / len_num
-    print(f"The average of the numbers is: {average}")
+    print(f"The average of the number is: {average}")
 
 
-average()
+average_num()
