@@ -7,4 +7,6 @@ def cash_register():
     print(newlist)
 
 
+cents_per_toonie = 200
+
 cash_register()
