@@ -3,19 +3,46 @@ from skimage.metrics import structural_similarity as ssim
 import matplotlib.pyplot as plt
 import numpy as np
 import cv2
+import pygame
+import pygame.camera
+
+import sys
+
+# accept the image e.g. "house1.png" from the user
+
+
+# secondary_user1 = Person("", "", image, 5, 7, Asian, E13248488)
+
+
+# registered_owner = Person("Zachary", "Butler", image.png, 5, 10, "black", E60101823)
+# driver = user()
+# imageA = Person("Zachary", "Butler", image.png, 5, 10, "black", E60101823)
+# access_date = Person("Zachary", "Butler", image.png, 5, 10, "black", E60101823)
 
 
 class Person:
+    first_name = input("Enter your first name: ")
+    last_name = input("Enter your last name")
+    imageB = raw_input("enter the name of the image file: ")
+    imageA = Image.open(sys.argv[1])
+    height = input("Enter your height in ft and inches: ")
+    race = input("Enter your race: ")
+    dl_number = input("Enter your driver's license number: ")
+
     def _init_(
         self, first_name, last_name, image, height_ft, height_in, race, license_number
     ):
         self.first_name = first_name
         self.last_name = last_name
-        self.image = image
+        self.image = imageB
         self.height_ft = height_ft
         self.height_in = height_in
         self.race = race
         self.license_number = license_number
+
+    def ID(self):
+        name = self.Person()
+        print(name)
 
 
 class address:
@@ -59,12 +86,20 @@ class address:
             key = cv2.waitKey(1)
             if key == ord("q"):
                 break
+
         # Saving the image
         showPic = cv2.imwrite("filename.png", frame)
         print(showPic)
+
         # Shutting down the camera
         video.release()
         cv2.destroyAllWindows
+
+        # read an image from a file using the cv2.imread() method
+        imageB = cv2.imread("image.png")
+
+        cv2.imshow("Image", imageB)
+        cv2.waitKey(0)
 
         # load the images -- the original, the original + contrast,
         # and the original + photoshop
@@ -83,14 +118,65 @@ class address:
         # the two images are
         return err
 
+    def compare_images(imageA, imageB, title):
+        # compute the mean squared error and structural similarity
+        # index for the images
+        m = mse(imageA, imageB)
+        s = ssim(imageA, imageB)
+        # setup the figure
+        fig = plt.figure(title)
+        plt.suptitle("MSE: %.2f, SSIM: %.2f" % (m, s))
+        # show first image
+        ax = fig.add_subplot(1, 2, 1)
+        plt.imshow(imageA, cmap=plt.cm.gray)
+        plt.axis("off")
+        # show the second image
+        ax = fig.add_subplot(1, 2, 2)
+        plt.imshow(imageB, cmap=plt.cm.gray)
+        plt.axis("off")
+        # show the images
+        plt.show()
 
-owner1 = Person("Zachary", "Butler", image.png, 5, 10, "black", E60101823)
-secondary_user1 = Person("", "", image, 5, 7, Asian, E13248488)
+    # load the images -- the original, the original + contrast,
+    # and the original + photoshop
+    original = cv2.imread("images/jp_gates_original.png")
+    contrast = cv2.imread("images/jp_gates_contrast.png")
+    shopped = cv2.imread("images/jp_gates_photoshopped.png")
+    # convert the images to grayscale
+    original = cv2.cvtColor(original, cv2.COLOR_BGR2GRAY)
+    contrast = cv2.cvtColor(contrast, cv2.COLOR_BGR2GRAY)
+    shopped = cv2.cvtColor(shopped, cv2.COLOR_BGR2GRAY)
+
+    def image_compare():
+        # initializing  the camera
+        pygame.camera.init()
+
+        # make the list of all available cameras
+        camlist = pygame.camera.list_cameras()
+
+        # if camera is detected or not
+        if camlist:
+            # initializing the cam variable with default camera
+            cam = pygame.camera.Camera(camlist[0], (640, 480))
+
+            # opening the camera
+            cam.start()
+
+            # capturing the single image
+            image = cam.get_image()
+
+            # saving the image
+            pygame.image.save(image, "filename.jpg")
+
+        # if camera is not detected the moving to else part
+        else:
+            print("No camera on current device")
 
 
-registered_owner = Person()
-image = Person()
-access_date = Person()
+def main():
+    driver = Person()
+    print(driver.imageB)
+    print(driver.imageA)
 
 
-print(Person.self)
+print("ID analysis complete")
