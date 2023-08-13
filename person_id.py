@@ -5,7 +5,8 @@ import numpy as np
 import cv2
 import pygame
 import pygame.camera
-
+import requests
+import creds
 import sys
 
 # accept the image e.g. "house1.png" from the user
@@ -21,28 +22,59 @@ import sys
 
 
 class Person:
-    first_name = input("Enter your first name: ")
-    last_name = input("Enter your last name")
-    imageB = raw_input("enter the name of the image file: ")
-    imageA = Image.open(sys.argv[1])
-    height = input("Enter your height in ft and inches: ")
-    race = input("Enter your race: ")
-    dl_number = input("Enter your driver's license number: ")
+    x = int(input("Enter no. of drivers allowed: ").strip())
+    d = {}
+
+    for i in range(x):
+        first_name = input("Enter your first name: ")
+        last_name = input("Enter your last name")
+        imageB = raw_input("enter the name of the image file: ")
+        # imageA = Image.open(sys.argv[1])
+        height = input("Enter your height in ft and inches: ")
+        race = input("Enter your race: ")
+        dl_number = input("Enter your driver's license number: ")
+        driver = input().split("")
+        driver_info = int(input())
+        d[driver[0]] = driver[1], driver[2], driver[3], driver[4], driver[5], driver[6]
+    print(d)
 
     def _init_(
-        self, first_name, last_name, image, height_ft, height_in, race, license_number
+        self, first_name, last_name, imageB, height_ft, height_in, race, license_number
     ):
         self.first_name = first_name
         self.last_name = last_name
-        self.image = imageB
+        self.imageB = imageB
         self.height_ft = height_ft
         self.height_in = height_in
         self.race = race
         self.license_number = license_number
 
-    def ID(self):
+    def ID_source(self):
         name = self.Person()
         print(name)
+
+    def ID_print(self):
+        print(first_name, last_name, imageB, height_ft, height_in, race, license_number)
+
+
+def create_session():
+    s = requests.Session()
+    s.headers.update(
+        {"X-Shopify-Accccess-Token": creds.token, "Content-Type": "application/json"}
+    )
+    return s
+
+
+def main():
+    sess = create_session()
+    resp = sess.get(creds.url + "/admin/api/2021-07/products.json?limit=10")
+    print(sresp.json())
+    owner1 = Person()
+    owner1.ID_print()
+
+
+if _name_ == "_main_":
+    Person()
 
 
 class address:
