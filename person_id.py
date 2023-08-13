@@ -1,4 +1,5 @@
 # import the necessary packages
+from driver_dictionary import driver_dictionary
 from skimage.metrics import structural_similarity as ssim
 import matplotlib.pyplot as plt
 import numpy as np
