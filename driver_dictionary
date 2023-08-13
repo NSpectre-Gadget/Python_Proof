@@ -1,26 +1,28 @@
 from pathlib import Path
 
 x = int(input("Enter no. of drivers allowed: ").strip())
-d = {}
+person = {}
 
 for i in range(x):
     # driver = input().split(" ")
     # driver_info = int(input())
-    first_name = input("Enter your first name: ")
-    last_name = input("Enter your last name: ")
-    imageb = Path(input("enter the name of the image file: "))
+    name = input("Enter your first name: ")
+    # last_name = input("Enter your last name: ")
+    imageb = input("enter the name of the image file: ")
     # imageA = Image.open(sys.argv[1])
     height = input("Enter your height in ft and inches: ")
     race = input("Enter your race: ")
     dl_number = input("Enter your driver's license number: ")
     # driver = input().split("")
     # driver_info = int(input())
-    d[i] = (
-        [first_name[0]],
-        last_name[1],
-        imageb[2],
-        height[3],
-        race[4],
-        dl_number[5],
-    )
-print(d)
+    person[name] = [imageb, height, race, dl_number]
+    # d.append(
+    #    {
+    #        "name": name,
+    #        "imageb": imageb,
+    #        "height": height,
+    #        "race": race,
+    #        "drivers license number": dl_number,
+    #    }
+    # )
+print(person)
