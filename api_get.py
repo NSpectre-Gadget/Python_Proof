@@ -1,6 +1,6 @@
 import requests
 
-response = requests.get("https://randomsuer.me/api")
+response = requests.get("https://progressive.me/api")
 print(response.status_code)
 print(response.json())
 
