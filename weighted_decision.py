@@ -1,7 +1,7 @@
-x_input=[0.1, 0.5, 0.2]
-w_weights=[0.4, 0.3, 0.6]
+x_input=[0.1, 0.5, 0.2] #factors considered
+w_weights=[0.4, 0.3, 0.6] # weight given to each factor
 threshold=0.5
-
+#using a threshold instead of applying bias to each weighted input
 def step(weighted_sum):
     if weighted_sum > threshold:
         return 1
