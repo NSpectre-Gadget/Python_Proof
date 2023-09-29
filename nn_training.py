@@ -1,6 +1,7 @@
-import matplotlib.plplot as plt
-import numpy as np
-import pandas as pd
+import matplotlib.pyplot as plt
+
+# import numpy as np
+# import pandas as pd
 from nn_datageneration import generate_data
 from sigmoid import sigmoid
 from cross_entropy import cross_entropy
@@ -10,14 +11,14 @@ from update_bias import update_bias
 
 bias = 0.5
 l_rate = 0.1
-epoch = 10
+epochs = 10
 epoch_loss = []
 
 data, weights = generate_data(4, 3)
 
 
-def train_model(data, weights, bias, l_rate, epoch):
-    for e in range(epoch):
+def train_model(data, weights, bias, l_rate, epochs):
+    for e in range(epochs):
         individual_loss = []
         for i in range(len(data)):
             feature = data.loc[i][:-1]
@@ -35,11 +36,13 @@ def train_model(data, weights, bias, l_rate, epoch):
             print(weights, bias)
 
         average_loss = sum(individual_loss) / len(individual_loss)
-        epoch_loss.append()
+        epoch_loss.append(average_loss)
         print("********************")
         print("epoch", e)
         print(average_loss)
-        train_model(data, weights, bias, l_rate, epoch)
+
+
+train_model(data, weights, bias, l_rate, epochs)
 
 
 # (features * weights) + bias
@@ -54,8 +57,8 @@ def train_model(data, weights, bias, l_rate, epoch):
 
 
 # update_bias()
-
+# np.epoch([0, 6])
 # plot the average loss
-df = pd.DataFrame(epoch_loss)
-df_plot = df.plt(kind="line", grid=True).get_figure()
-df_plot.savefig("training_Loss.pdf")
+# df = pd.DataFrame(epoch_loss)
+# df_plot = df.plt(kind="line", grid=True).get_figure()
+# df_plot.savefig("training_Loss.pdf")
